@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="model" default="$(find mpu_6050_driver)/urdf/plane.urdf.xacro"/>
+  <arg name="gui" default="true" />
+  
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+  </node>
+  
+  <node name="imu_node" pkg="mpu_6050_driver" type="imu_node.py" >
+  </node>
+  
+  <node name="imu_filter_node_for_orientation" pkg="imu_complementary_filter" type="complementary_filter_node" >
+  </node>
+  
+  <node name="rpy_tf" pkg="mpu_6050_driver" type="tf_broadcaster_imu.py" >
+  </node>
+  
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find mpu_6050_driver)/config/rviz_config.rviz"/> 
+</launch>

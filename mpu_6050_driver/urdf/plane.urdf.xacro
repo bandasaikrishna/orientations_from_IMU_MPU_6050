@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<robot name="plane" xmlns:xacro="http://ros.org/wiki/xacro">
+
+ 
+    <material name="white">
+	    <color rgba="1 1 1 1"/>
+    </material>
+
+
+    <link name="world">
+        
+    </link>
+
+    <joint name="world_joint" type="fixed">
+        <origin xyz="0 0 0.5" rpy="0 0 0" />
+        <parent link="world" />
+        <child link="plane" />
+    </joint>
+
+    <link name="plane">
+    
+    </link>   
+    
+    
+    <joint name="imu_joint" type="floating">
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <parent link="plane" />
+        <child link="imu_link" />
+    </joint>
+
+    <link name="imu_link">
+    <visual>
+      <origin rpy="0 0 1.5708" xyz="0 0 0"/>
+      <geometry>
+        <mesh filename="package://mpu_6050_driver/mesh/FUGMJ38JX8T7E5A.stl" scale="0.01 0.01 0.01"/> 
+      </geometry>
+      <material name="white"/>
+    </visual>
+    </link>   
+
+    
+</robot>
